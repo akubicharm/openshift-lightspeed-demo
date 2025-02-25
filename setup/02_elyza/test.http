@@ -1,0 +1,55 @@
+# URLを環境変数に設定
+@url = http://vllm-gpu-elyza.apps.cluster-7s5nh.7s5nh.sandbox2150.opentlc.com/v1
+
+
+### 送信
+GET {{url}}/models
+Content-Type: application/json
+
+
+
+### 送信
+POST {{url}}/completions
+Content-Type: application/json
+
+{
+          "model": "elyza/Llama-3-ELYZA-JP-8B",
+          "prompt": "San Francisco is a",
+          "max_tokens": 7,
+          "temperature": 0
+}
+
+
+### 送信
+POST {{url}}/chat/completions
+Content-Type: application/json
+
+{
+          "model": "elyza/Llama-3-ELYZA-JP-8B",
+
+         "messages": [
+              {"role": "user", "content": "Who won the world series in 2020?"},
+              {"role": "assistant", "content": "You are a helpful assistant."}
+        ]
+}
+
+
+###
+GET http://localhost:8080/v1/models
+
+
+###
+GET http://localhost:8080/v1/chat/completions
+Content-Type: application/json
+
+{
+    "model": 
+    "/models-cache/Llama-3-ELYZA-JP-8B-GGUF/Llama-3-ELYZA-JP-8B-q4_k_m.gguf",
+  "messages": [
+    { "role": "system", "content": "あなたは誠実で優秀な日本人のアシスタントです。特に指示が無い場合は、常に日本語で回答してください。" },
+    { "role": "user", "content": "古代ギリシャを学ぶ上で知っておくべきポイントは？" }
+  ],
+  "temperature": 0.6,
+  "max_tokens": -1,
+  "stream": false
+}

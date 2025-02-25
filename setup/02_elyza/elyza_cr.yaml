@@ -1,0 +1,19 @@
+apiVersion: ols.openshift.io/v1alpha1
+kind: OLSConfig
+metadata:
+  name: cluster
+spec:
+  llm:
+    providers:
+      - name: myOpenai
+        type: openai
+        credentialsSecretRef:
+          name: credentials
+        url: "https://llama-3-elyza-jp-8b-awq-user1.apps.cluster-lxcwx.lxcwx.sandbox648.opentlc.com/v1"
+        models:
+          - name: /mnt/models/
+  ols:
+    defaultModel: /mnt/models/
+    defaultProvider: myOpenai
+    logLevel: DEBUG
+
